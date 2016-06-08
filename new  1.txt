@@ -1,0 +1,21 @@
+Zdravim,
+
+chcem si spravit bakalarku z oblasti computer vision a chcem sa ta spytat ci by si nemohol byt mojim veducim bakalarskej prace. Budem sa snazit byt nenarocny na cas a pracovat samostatne.
+
+Zakladnu vec co by som chcel dosiahnut je spravit program na scanovanie blockov do loterie. Moja predstava je taka ze nebudem robit OCR, iba z odfoteneho blocka vystrihnem miesta s potrebnymi udajmi a tieto vystrihnute casti budem posielat tesseractu na OCR. 
+
+Co je fajn je to ze na vecsine blockov pozicie zaujimavych casti su konstantne voci okrajom blocka. Teda ze staci vediet najst okraje a rohy blocka a potom uz neni problem podla toho najst a vyseknut zaujimave casti. 
+
+Moj zamyslany postup prace je priblizne taky ze najprv si dam riadnym scannerom nascenovat nejakych 100 "dobrych" blockov a na tychto dobrych datach by sa mohlo spravit hladanie okrajov a vysekavanie zaujimavych casti. Potom v dalsej faze by som chcel prejst na scanovanie blockov cez webkameru, kde by sa pracovalo s pohyblivym obrazom, zistovalo by sa kedy je obraz stabilny a odfotilo by sa napriklad 10 zaberov za pol sekundy a poslalo by sa to do nejakeho zasobnika na spracovanie. 
+
+Nema asi zmysel robit real time spracovanie, dolezite je aby clovek co to bude obsluhovat drzal blocek na scanneri maximalne 1 sekundu a pokracoval dalej. Ci sa ten blocek spracuje za 3 sekundy alebo 10 sekund, program to aj tak po nejakom case vsetko spracuje, hlavne aby clovek stravil pri tom co najmenej casu.
+
+Samozrejme chcem si veci co najviac zjednodusovat:
+- napriklad nechcem robit vseobecny scanner na vsetky mozne blocky, ale program co bude vediet scanovat velke mnozstvo blockov rovnakeho typu a pri kazdej session program bude vediet aky typ blockov prave bude scanovat, takze ziadne take ze zistujem ci je datum pisany slovom alebo cislami, to uz bude program vediet dopredu
+- dalej si chcem vyrobit vlastny scanner, co ma byt kartonova krabica kde vo vnutri budu nejake svietidla a webkamera a navrchu sklo, aby som na to sklo polozil blocek, aby bol pekne rovny, takze tym padom odpadne plno dalsich problemov
+
+Takze si myslim ze za takychto okolnosti nebude ziaden problem scanovaci program vytvorit. Priblizne tak si to ja nejak predstavujem, snad to bude splnovat kriteria narocnosti pre bakalarsku pracu. 
+
+Teda sa pytam ci by si mal zaujem ist do toho? 
+
+Jan Murin

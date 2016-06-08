@@ -1,0 +1,123 @@
+TODO
+- na reality.inzercia.sk neregistrovany skusit najst meno inzerenta
+
+
+DB udaje:
+- connection string
+- username
+- password
+
+- ziskat prihlasovacie udaje
+- aktualizovat data
+
+1. Autentifikacia
+CLIENTI
+- id
+- kluc
+- nazov_pc
+- ma_povolenie
+- cas_aktualizacie - cas kedy moze aktualizovat
+- kredit
+- minutych - kolko roznych dni pristupil k databaze
+
+POVOLENIA
+- zaznamenavaju sa tu datumy pre jednotlivych klientov kedy vyuzili svoje kredity na ake dni
+- ak je pocet kreditov vecsi ako pocet dni kedy som dostal povolenie, tak dostanem povolenie aj na dnesny den
+- id
+- nazov_pc
+- kluc
+- datum 
+
+KLUCE
+- kluc
+- poznamka
+
+LOG
+- id
+- kluc
+- nazov_pc
+- datum
+- typ
+- message
+	
+2. stahovanie aktualizacii
+- ak su ziskane pristupove udaje tak moze prebiehat aktualizacia
+- kazdu polhodinu v urceny cas
+
+
+1. client odosle kluc a nazov_pc
+2. zisti sa platnost klucu
+	KLUC NIE JE PLATNY
+	2.1 vrati sa chybove hlasenie
+	2.2 zapise sa do logu
+	KLUC JE PLATNY
+	3. zisti sa ci client existuje v tabulke clientov
+		CLIENT NEEXISTUJE
+		3.1 prida sa do zoznamu clientov novy s defaultnymi nastaveniami
+		3.2 v tabulke povoleni sa pre tohto klienta nastavi aktualny den ako povoleny (minutych bude 1 ako defaultne nastavenie)
+		3.3 odoslu sa prihlasovacie udaje do db s casom kedy moze aktualizovat, zapise sa do logu
+
+		CLIENT EXISTUJE
+		3.1 zisti sa ci nie je zabanovany
+			JE ZABANOVANY
+			3.2 odosle sa mu hlasenie o bane, zapise sa do logu
+			NIE JE ZABANOVANY
+			3.2 zisti sa posledny den pre aktualny nazov_pc a kluc kedy dostal povolenie
+				AKTUALNY DEN
+				3.3 ma pre aktualny den povolenie, odosle sa mu prihlasovacie udaje, zapise sa do logu
+				POSLEDNY DEN NIE JE AKTUALNY DEN
+				3.3 zisti sa ci je minutych < kredit
+					JE MENEJ
+					3.4 zvysi sa pocet minutych, vlozi sa pre nazov_pc a kluc aktualny den ako povoleny do tabulky povoleni
+					3.5 odoslu sa prihlasovacie udaje, zapise sa do logu
+					NIE JE MENEJ
+					3.4 odosle sa hlaska o minuti kreditu, zapise sa do logu
+
+
+0 3 5 8 10 12 
+A=0
+B=1
+C=1
+0&1 | !0 & 1 & 1
+http://www.nehnutelnosti.sk/vyhladavanie?p%5Blimit%5D=60&p%5Bpage%5D=1
+
+TODO
+	- menit background v tabulke podla okolnosti
+	
+
+
+POSTUP FILTRACIE
+1. Nazov: getInzeratyList(aktPortal, aktPocet);
+	TRIGGER: 	- portalComboBoxActionPerformed
+				- pocetPovolenychInzeratovUserSpinnerStateChanged
+	OUTPUT: inzeraty = database.getInzeratyList(aktPortal, aktPocet);
+	FOLLOW: refreshMestaList();
+
+2. 	Nazov: refreshMestaList();
+	TRIGGER: 	- database.getInzeratyList(aktPortal, aktPocet);
+				- vybavenyButtonActionPerformed
+	OUTPUT:	refreshnuty list miest
+	FOLLOW: refreshCheckboxesNames
+
+3. Nazov: refreshCheckboxesNames();
+	TRIGGER: 	- refreshMestaList();
+				- mestoListMouseReleased
+				- exportButtonActionPerformed
+				- noveDniSpinnerStateChanged
+	OUTPUT:	refreshnute checkboxy podla zvoleneho mesta
+	FOLLOW: refreshTableWithFilters
+
+4. Nazov: refreshTableWithFilters();
+	TRIGGER: 	- refreshCheckboxesNames
+				- vytlacene CheckBoxActionPerformed
+				- videne CheckBoxActionPerformed
+				- nevidene CheckBoxActionPerformed
+				- surne CheckBoxActionPerformed
+				- nove CheckBoxActionPerformed
+	OUTPUT:	zoznam table inzeratov podla checkboxov a mesta
+	FOLLOW: refreshInzeratyTable
+	
+5. Nazov: refreshInzeratyTable();
+	TRIGGER: 	- refreshTableWithFilters
+	OUTPUT:	nahadze sa do tabulky inzeraty v tableInzeraty
+	FOLLOW: ------------------

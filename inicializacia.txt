@@ -1,0 +1,45 @@
+(portal+pocet)-->inzeraty-->(kategoria)-->kategoriaInzeraty-->(mesto)-->mestoInzeraty-->(keyword)-->keywordsInzeraty-->(toggle button)-->toggleInzeraty ==> table
+POSTUP FILTRACIE
+1. Nazov: INIT
+	TRIGGER: 	- spustenie programu
+				- portalComboBoxActionPerformed
+				- pocetPovolenychInzeratovUserSpinnerStateChanged
+	OUTPUT:  inzeraty
+	FOLLOW: refreshMestaList();
+
+2. 	Nazov: refreshMestaList (refreshInzeratyWithKategoria)
+	TRIGGER: 	- portalComboBoxActionPerformed
+				- pocetPovolenychInzeratovUserSpinnerStateChanged
+				- typ predam
+				- typ kupim
+				- kategoria
+	OUTPUT:	refreshnute listy miest + kategoriaInzeraty
+	FOLLOW: refreshKeywords (vsetkyMestaListMouseClicked || vybraneMestaListMouseClicked)
+
+3. Nazov: refreshKeywords (refreshInzeratyWithMesta)
+	TRIGGER: 	- refreshMestaList();
+				- vsetkyMestaListMouseReleased
+				- vybraneMestaListMouseReleased
+	OUTPUT:	refreshnute keywordy + mestaInzeraty
+	FOLLOW: refreshInzeratyWithKeywords
+
+4. Nazov: refreshInzeratyWithKeywords 
+	TRIGGER: 	- keywordsListMouseCLicked
+				- refreshKeywords
+	OUTPUT:	keywordsInzeraty
+	FOLLOW: refreshTableWithToggleButtons
+	
+5. Nazov: refreshTableWithToggleButtons 
+	TRIGGER: 	- refreshKeywords
+				- toggle buttony
+				- videne CheckBoxActionPerformed
+				- nevidene CheckBoxActionPerformed
+				- surne CheckBoxActionPerformed
+				- nove CheckBoxActionPerformed
+	OUTPUT:	 tableInzeraty
+	FOLLOW: refreshInzeratyTable
+	
+5. Nazov: refreshInzeratyTable();
+	TRIGGER: 	- refreshTableWithFilters
+	OUTPUT:	nahadze sa do tabulky inzeraty v tableInzeraty
+	FOLLOW: ------------------

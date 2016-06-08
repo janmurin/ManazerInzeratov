@@ -1,0 +1,20 @@
+MYSQL:
+CREATE TABLE Inzeraty( 
+id INT NOT NULL, 
+portal varchar(255),
+nazov varchar(255),
+text varchar(4000),
+meno varchar(255),
+telefon varchar(255),
+lokalita varchar(255),
+aktualny_link varchar(255),
+cena varchar(25),
+time_inserted timestamp,
+pocet_zobrazeni integer,
+sent boolean,
+zaujimavy boolean,
+surne boolean,
+precitany boolean,
+typ varchar(20),
+kategoria varchar(25),
+PRIMARY KEY ( id ) );

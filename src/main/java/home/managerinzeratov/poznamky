@@ -1,0 +1,29 @@
+ZOBRAZIT
+surne + videne | nevidene | nove dni | vytlacene
+
+- chcem vidiet IBA surne a z nich odfiltrovat videne alebo nevidene a nove dni a vytlacene
+- chcem vidiet AJ surne
+
+PRIPADY
+v prvom filtri vyberam zjednotenie, v sekundarnom uz mozem vyberat z aktualneho vyberu prienik
+tie mnoziny maju prieniky, ak vyberiem nejaku mnozinu alebo zjednotenie mnozin, tak potom na tejto mnozine mozem robit este dodatocne filtre
+1. surne- zobrazi vsetky co su surne
+2. nove dni- zobrazi vsetky co su nove dni
+3. videne- vsetko co je videne
+4. nevidene
+5. vytlacene
+
+
+
+FILTER
+- select do databazy: pocet a portal
+- filter v pameti: 
+1. mesto
+2. checkboxy: odoslane, videne, nove, surne
+
+AKTUALIZACIA
+1. zistit v lokalDB najstarsi time_inserted
+1.1 zmaza
+2. ziskat zoznam idciek zo serverDB, ktore maju novsi time_inserted
+3. stiahnut tieto inzeraty po 5000
+4. skontrolovat ci sa stiahlo vsetko a opakovat proces znova
